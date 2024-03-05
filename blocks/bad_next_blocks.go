@@ -16,3 +16,7 @@ var BadValueNextBlocks = []Block{
 	Variable{},
 	Value{},
 }
+
+var BadEqualNextBlocks = []Block{
+	Equal{},
+}
