@@ -1,14 +1,11 @@
 package blocks
 
-var KEYWORDS = map[string]string{
+var KEYWORDS = []string{
 	// math operators
-	"plus":           "+",
-	"minus":          "-",
-	"multiplication": "*",
-	"division":       "/",
-	"exact-division": "//",
-
-	// variables assignment
-	"default-assignment": "@=",
-	"special-assignment": "@@=",
+	"+",
+	"-",
+	"*",
+	"/",
+	// variable assignment
+	"@=",
 }
