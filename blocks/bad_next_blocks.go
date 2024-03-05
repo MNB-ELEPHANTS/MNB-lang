@@ -24,3 +24,7 @@ var BadEqualNextBlocks = []Block{
 var BadBiggerBlocks = []Block{
 	Equal{},
 }
+
+var BadLessNextBlocks = []Block{
+	Equal{},
+}
