@@ -20,3 +20,7 @@ var BadValueNextBlocks = []Block{
 var BadEqualNextBlocks = []Block{
 	Equal{},
 }
+
+var BadBiggerBlocks = []Block{
+	Equal{},
+}
