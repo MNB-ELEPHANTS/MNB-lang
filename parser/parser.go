@@ -77,7 +77,7 @@ func (p *Parser) Parse(code string) []blocks.Block {
 		} else if b == ">" {
 			endBlocks = append(endBlocks, blocks.NewBigger(">"))
 		} else if b == "<" {
-			endBlocks = append(endBlocks, blocks.NewBigger("<"))
+			endBlocks = append(endBlocks, blocks.NewLess("<"))
 		} else if b == "=" {
 			endBlocks = append(endBlocks, blocks.NewEqual("="))
 		} else if p.IsValue(b) {
