@@ -79,7 +79,7 @@ func (p *Parser) Parse(code string) []blocks.Block {
 		}
 
 		// Base functions
-		if b == "put" {
+		if b == "slon" {
 			endBlocks = append(endBlocks, blocks.NewPut("put"))
 
 			// Math operations

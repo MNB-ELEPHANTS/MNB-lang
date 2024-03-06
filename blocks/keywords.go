@@ -28,7 +28,7 @@ var KEYWORDS = []string{
 	")",
 
 	// Base functions
-	"put",
+	"slon",
 }
 
 var CODES = map[string]string{
