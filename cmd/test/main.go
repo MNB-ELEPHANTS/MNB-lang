@@ -2,19 +2,20 @@ package main
 
 import (
 	"fmt"
+	"mnb/mnb-lang/lexer"
 	"mnb/mnb-lang/parser"
-	"reflect"
+	"mnb/mnb-lang/translator"
 )
 
-var testStr = `a = 5
+var testStr = `
+a = 5
 b = 'test string'
-a2 = a * 10
-a < a2`
+if a > b
+`
 
 func main() {
 	p := parser.New()
-	blocks := p.Parse(testStr)
-	for _, b := range blocks {
-		fmt.Println(reflect.TypeOf(b), b.GetBlockValue())
-	}
+	l := lexer.New(p)
+	t := translator.New(l)
+	fmt.Println(t.Translate(testStr))
 }

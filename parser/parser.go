@@ -89,6 +89,8 @@ func (p *Parser) Parse(code string) []blocks.Block {
 			endBlocks = append(endBlocks, blocks.NewEqual("="))
 		} else if b == ";" {
 			endBlocks = append(endBlocks, blocks.NewSeparator(b))
+		} else if b == "if" {
+			endBlocks = append(endBlocks, blocks.NewIf(b))
 		} else if p.IsValue(b) {
 			endBlocks = append(endBlocks, blocks.NewValue(b))
 		} else if p.IsVariable(b) {

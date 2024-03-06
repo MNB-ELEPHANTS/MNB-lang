@@ -33,3 +33,13 @@ var BadSeparatorNextBlocks = []Block{
 	Multiplication{},
 	Division{},
 }
+
+var BadIfNextBlocks = []Block{
+	Equal{},
+	Bigger{},
+	Less{},
+	Plus{},
+	Minus{},
+	Multiplication{},
+	Division{},
+}
