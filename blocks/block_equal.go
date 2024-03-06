@@ -15,5 +15,5 @@ func (p Equal) GetBlockValue() string {
 }
 
 func (p Equal) CheckNextBlock(next Block) bool {
-	return !InBlocks(next, BadEqualNextBlocks)
+	return !InBlocks(next, BadComparisonNextBlocks)
 }

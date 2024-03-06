@@ -11,4 +11,6 @@ var KEYWORDS = []string{
 	"<",
 	// variable assignment
 	"@=",
+	"=",
+	";",
 }

@@ -6,9 +6,14 @@ import (
 	"reflect"
 )
 
+var testStr = `
+a = 5
+b = yes
+`
+
 func main() {
 	p := parser.New()
-	blocks := p.Parse("fuck=12321 > *  < + - =yes")
+	blocks := p.Parse(testStr)
 	for _, b := range blocks {
 		fmt.Println(reflect.TypeOf(b), b.GetBlockValue())
 	}

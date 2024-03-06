@@ -17,14 +17,19 @@ var BadValueNextBlocks = []Block{
 	Value{},
 }
 
-var BadEqualNextBlocks = []Block{
+var BadComparisonNextBlocks = []Block{
 	Equal{},
+	Bigger{},
+	Less{},
 }
 
-var BadBiggerBlocks = []Block{
+var BadSeparatorNextBlocks = []Block{
 	Equal{},
-}
-
-var BadLessNextBlocks = []Block{
-	Equal{},
+	Bigger{},
+	Less{},
+	Value{},
+	Plus{},
+	Minus{},
+	Multiplication{},
+	Division{},
 }

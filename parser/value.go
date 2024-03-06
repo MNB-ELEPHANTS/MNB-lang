@@ -5,8 +5,8 @@ import "unicode"
 func (p *Parser) IsValue(v string) bool {
 	return v == "yes" || v == "no" ||
 		IsDigit(v) ||
-		string(v[0]) == "\"" ||
-		string(v[len(v)-1]) == "\""
+		string(v[0]) == "'" ||
+		string(v[len(v)-1]) == "'"
 }
 
 func IsDigit(s string) bool {

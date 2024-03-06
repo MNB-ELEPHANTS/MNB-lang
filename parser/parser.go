@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"fmt"
 	"mnb/mnb-lang/blocks"
 	"strings"
 )
@@ -16,13 +17,13 @@ func New() *Parser {
 }
 
 func (p *Parser) PreProcess(code string) []string {
-	preCode := strings.Split(code, "\"")
+	preCode := strings.Split(code, "'")
 
 	var parts []string
 
 	for i, part := range preCode {
 		if i%2 != 0 {
-			parts = append(parts, "\""+part+"\"")
+			parts = append(parts, "'"+part+"'")
 		} else {
 			parts = append(parts, part)
 		}
@@ -31,7 +32,7 @@ func (p *Parser) PreProcess(code string) []string {
 	var parts2 []string
 
 	replaceList := map[string]string{
-		"\n": " ",
+		"\n": ";",
 	}
 
 	for _, kv := range p.KeyWords {
@@ -43,8 +44,8 @@ func (p *Parser) PreProcess(code string) []string {
 			for k, v := range replaceList {
 				part = strings.ReplaceAll(part, k, v)
 			}
-			parts2 = append(parts2, part)
 		}
+		parts2 = append(parts2, part)
 	}
 
 	var end []string
@@ -63,6 +64,7 @@ func (p *Parser) PreProcess(code string) []string {
 
 func (p *Parser) Parse(code string) []blocks.Block {
 	preBlocks := p.PreProcess(code)
+	fmt.Println(preBlocks)
 	var endBlocks []blocks.Block
 
 	for _, b := range preBlocks {
