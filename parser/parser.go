@@ -1,7 +1,6 @@
 package parser
 
 import (
-	"fmt"
 	"mnb/mnb-lang/blocks"
 	"strings"
 )
@@ -32,7 +31,7 @@ func (p *Parser) PreProcess(code string) []string {
 	var parts2 []string
 
 	replaceList := map[string]string{
-		"\n": ";",
+		"\n": " ; ",
 	}
 
 	for _, kv := range p.KeyWords {
@@ -50,13 +49,16 @@ func (p *Parser) PreProcess(code string) []string {
 
 	var end []string
 
-	for _, part := range parts2 {
-		part2 := strings.Split(part, " ")
-		for _, part3 := range part2 {
-			if part3 != "" {
-				end = append(end, part3)
+	for i, part := range parts2 {
+		if i%2 == 0 {
+			part2 := strings.Split(part, " ")
+			for _, part3 := range part2 {
+				if part3 != "" {
+					end = append(end, part3)
+				}
 			}
 		}
+		end = append(end, part)
 	}
 
 	return end
@@ -64,10 +66,13 @@ func (p *Parser) PreProcess(code string) []string {
 
 func (p *Parser) Parse(code string) []blocks.Block {
 	preBlocks := p.PreProcess(code)
-	fmt.Println(preBlocks)
 	var endBlocks []blocks.Block
 
 	for _, b := range preBlocks {
+		if b == "" {
+			continue
+		}
+
 		if b == "+" {
 			endBlocks = append(endBlocks, blocks.NewPlus("+"))
 		} else if b == "-" {
@@ -82,6 +87,8 @@ func (p *Parser) Parse(code string) []blocks.Block {
 			endBlocks = append(endBlocks, blocks.NewLess("<"))
 		} else if b == "=" {
 			endBlocks = append(endBlocks, blocks.NewEqual("="))
+		} else if b == ";" {
+			endBlocks = append(endBlocks, blocks.NewSeparator(b))
 		} else if p.IsValue(b) {
 			endBlocks = append(endBlocks, blocks.NewValue(b))
 		} else if p.IsVariable(b) {

@@ -6,10 +6,10 @@ import (
 	"reflect"
 )
 
-var testStr = `
-a = 5
-b = yes
-`
+var testStr = `a = 5
+b = 'test string'
+a2 = a * 10
+a < a2`
 
 func main() {
 	p := parser.New()
