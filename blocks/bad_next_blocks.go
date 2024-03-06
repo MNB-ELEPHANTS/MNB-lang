@@ -43,3 +43,29 @@ var BadIfNextBlocks = []Block{
 	Multiplication{},
 	Division{},
 }
+
+var BadAssignmentNextBlocks = []Block{
+	Equal{},
+	Bigger{},
+	Less{},
+	Plus{},
+	Minus{},
+	Multiplication{},
+	Division{},
+	Variable{},
+	If{},
+	Separator{},
+}
+
+var BadPutNextBlocks = []Block{
+	Equal{},
+	Bigger{},
+	Less{},
+	Plus{},
+	Minus{},
+	Multiplication{},
+	Division{},
+	Variable{},
+	If{},
+	Separator{},
+}

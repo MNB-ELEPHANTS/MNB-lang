@@ -1,7 +1,7 @@
 package blocks
 
 var KEYWORDS = []string{
-	// math operators
+	// Math operators
 	"+",
 	"-",
 	"*",
@@ -9,8 +9,29 @@ var KEYWORDS = []string{
 	"=",
 	">",
 	"<",
-	// variable assignment
-	"@=",
+
+	// Variable assignment
+	"$$",
+	"##",
 	"=",
+
+	// Separator
 	";",
+
+	// If
+	"if",
+
+	// Brackets
+	"{",
+	"}",
+	"(",
+	")",
+
+	// Base functions
+	"put",
+}
+
+var CODES = map[string]string{
+	"@=": "$$",
+	"==": "##",
 }

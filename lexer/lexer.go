@@ -1,6 +1,7 @@
 package lexer
 
 import (
+	"mnb/mnb-lang/blocks"
 	"mnb/mnb-lang/parser"
 )
 
@@ -14,14 +15,14 @@ func New(p *parser.Parser) *Lexer {
 	}
 }
 
-func (l *Lexer) Lex(code string) error {
+func (l *Lexer) Lex(code string) ([]blocks.Block, error) {
 	input := l.Parser.Parse(code)
 
 	for i := 0; i < len(input)-1; i++ {
 		if !input[i].CheckNextBlock(input[i+1]) {
-			return BadBlockSequenseErr
+			return input, BadBlockSequenseErr
 		}
 	}
 
-	return nil
+	return input, nil
 }

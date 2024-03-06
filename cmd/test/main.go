@@ -1,21 +1,41 @@
 package main
 
 import (
-	"fmt"
+	"io/ioutil"
+	"log"
 	"mnb/mnb-lang/lexer"
 	"mnb/mnb-lang/parser"
 	"mnb/mnb-lang/translator"
+	"os"
+	"os/exec"
+	"strings"
 )
 
-var testStr = `
-a = 5
-b = 'test string'
-if a > b
-`
-
 func main() {
+	content, err := os.ReadFile(os.Args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	p := parser.New()
 	l := lexer.New(p)
 	t := translator.New(l)
-	fmt.Println(t.Translate(testStr))
+	result := t.Translate(string(content))
+
+	goFileName := strings.Split(os.Args[1], ".")[0] + ".go"
+
+	writeFile(result, goFileName)
+	GoCompile(goFileName)
+}
+
+func writeFile(content, filename string) {
+	err := ioutil.WriteFile(filename, []byte(content), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+func GoCompile(filename string) {
+	cmd := exec.Command("go", "build", filename)
+	cmd.Run()
 }

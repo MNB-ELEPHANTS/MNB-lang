@@ -1,0 +1,14 @@
+a @= 10
+b @= 15
+
+put(a + b)
+
+a = 31
+
+if a < b {
+    put(b)
+}
+
+if a > b {
+    put(a)
+}
