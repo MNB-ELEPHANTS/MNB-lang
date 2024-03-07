@@ -17,9 +17,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	p := parser.New()
-	l := lexer.New(p)
-	t := translator.New(l)
+	l := lexer.New()
+	p := parser.New(l)
+	t := translator.New(p)
 	result := t.Translate(string(content))
 
 	goFileName := strings.Split(os.Args[1], ".")[0] + ".go"

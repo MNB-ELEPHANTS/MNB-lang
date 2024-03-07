@@ -1,14 +1,15 @@
 a @= 10
-b @= 15
 
-slon(a + b)
+slon(a*a)
 
-a = 31
+b @= 'fuck '
 
-if a < b {
-    slon(b)
+slon(b + '(and love too)')
+
+if a == 10 {
+    slon('a is 10')
 }
 
-if a > b {
-    slon(a)
+if a != 10 {
+    slon('a is not 10')
 }

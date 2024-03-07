@@ -1,28 +1,103 @@
 package lexer
 
 import (
-	"mnb/mnb-lang/blocks"
-	"mnb/mnb-lang/parser"
+	"unicode"
 )
 
-type Lexer struct {
-	Parser *parser.Parser
+type Lexer struct{}
+
+func New() *Lexer {
+	return &Lexer{}
 }
 
-func New(p *parser.Parser) *Lexer {
-	return &Lexer{
-		Parser: p,
-	}
-}
+func (l *Lexer) Lex(code string) []Token {
+	var tokens []Token
 
-func (l *Lexer) Lex(code string) ([]blocks.Block, error) {
-	input := l.Parser.Parse(code)
+	cursor := 0
 
-	for i := 0; i < len(input)-1; i++ {
-		if !input[i].CheckNextBlock(input[i+1]) {
-			return input, BadBlockSequenseErr
+	for cursor < len(code) {
+		// Code separator is next-line sign
+		if string(code[cursor]) == "\n" ||
+			string(code[cursor]) == ";" {
+			tokens = append(tokens, Separator{Value: "\n"})
+
+			// Math operations
+		} else if string(code[cursor]) == "+" {
+			tokens = append(tokens, Plus{Value: "+"})
+		} else if string(code[cursor]) == "-" {
+			tokens = append(tokens, Minus{Value: "-"})
+		} else if string(code[cursor]) == "*" {
+			tokens = append(tokens, Multiplication{Value: "*"})
+		} else if string(code[cursor]) == "/" {
+			tokens = append(tokens, Division{Value: "/"})
+		} else if string(code[cursor]) == "=" {
+			tokens = append(tokens, Equal{Value: "="})
+		} else if string(code[cursor]) == "@" &&
+			(cursor < len(code)-1 && string(code[cursor+1]) == "=") {
+			tokens = append(tokens, Assignment{Value: "@="})
+			cursor++
+
+			// Brackets
+		} else if string(code[cursor]) == "(" {
+			tokens = append(tokens, OpenBracket{Value: "("})
+		} else if string(code[cursor]) == ")" {
+			tokens = append(tokens, CloseBracket{Value: ")"})
+		} else if string(code[cursor]) == "{" {
+			tokens = append(tokens, OpenFigureBracket{Value: "{"})
+		} else if string(code[cursor]) == "}" {
+			tokens = append(tokens, CloseFigureBracket{Value: "}"})
+
+			// Comprasion tokens
+		} else if string(code[cursor]) == ">" {
+			tokens = append(tokens, Bigger{Value: ">"})
+		} else if string(code[cursor]) == "<" {
+			tokens = append(tokens, Less{Value: "<"})
+		} else if string(code[cursor]) == "=" &&
+			string(code[cursor+1]) == "=" {
+			tokens = append(tokens, IsEqual{Value: "=="})
+			cursor++
+		} else if string(code[cursor]) == "!" &&
+			string(code[cursor+1]) == "=" {
+			tokens = append(tokens, IsNotEqual{Value: "!="})
+			cursor++
+		} else if unicode.IsLetter(rune(code[cursor])) {
+			word := ""
+			for unicode.IsLetter(rune(code[cursor])) {
+				word = word + string(code[cursor])
+				cursor++
+			}
+			cursor--
+
+			switch word {
+			case "if":
+				tokens = append(tokens, If{"if"})
+			case "slon":
+				tokens = append(tokens, Put{Value: "slon"})
+			default:
+				tokens = append(tokens, Variable{Value: word})
+			}
+
+			// Variables
+		} else if string(code[cursor]) == "'" {
+			value := ""
+			cursor++
+			for string(code[cursor]) != "'" {
+				value = value + string(code[cursor])
+				cursor++
+			}
+			tokens = append(tokens, Value{Value: "\"" + value + "\""})
+		} else if unicode.IsDigit(rune(code[cursor])) {
+			num := ""
+			for unicode.IsDigit(rune(code[cursor])) {
+				num = num + string(code[cursor])
+				cursor++
+			}
+			cursor--
+			tokens = append(tokens, Value{Value: num})
 		}
+
+		cursor++
 	}
 
-	return input, nil
+	return tokens
 }
