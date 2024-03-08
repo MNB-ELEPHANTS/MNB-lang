@@ -82,11 +82,6 @@ type Division struct{ Value string }
 
 func (d Division) GetValue() string { return d.Value }
 
-// Put function token
-type Put struct{ Value string }
-
-func (p Put) GetValue() string { return p.Value }
-
 // Separator sign token
 type Separator struct{ Value string }
 
@@ -101,3 +96,28 @@ func (v Value) GetValue() string { return v.Value }
 type Variable struct{ Value string }
 
 func (v Variable) GetValue() string { return v.Value }
+
+// Put function token
+type Put struct{ Value string }
+
+func (p Put) GetValue() string { return p.Value }
+
+// Function token
+type Function struct{ Value string }
+
+func (f Function) GetValue() string { return f.Value }
+
+// Dot token
+type Dot struct{ Value string }
+
+func (d Dot) GetValue() string { return d.Value }
+
+// Comma token
+type Comma struct{ Value string }
+
+func (c Comma) GetValue() string { return c.Value }
+
+// Return token
+type Return struct{ Value string }
+
+func (r Return) GetValue() string { return r.Value }

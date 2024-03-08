@@ -33,9 +33,14 @@ func (t *Translator) Translate(code string) string {
 	for _, b := range input {
 		switch reflect.TypeOf(b) {
 
-		// Math operations
 		case reflect.TypeOf(lexer.Separator{}):
 			result = result + "\n"
+		case reflect.TypeOf(lexer.Dot{}):
+			result = result + "."
+		case reflect.TypeOf(lexer.Comma{}):
+			result = result + ","
+
+		// Math operations
 		case reflect.TypeOf(lexer.Minus{}):
 			result = result + "-"
 		case reflect.TypeOf(lexer.Plus{}):
@@ -67,6 +72,11 @@ func (t *Translator) Translate(code string) string {
 		// Else
 		case reflect.TypeOf(lexer.Else{}):
 			result = result + "else"
+		// Function
+		case reflect.TypeOf(lexer.Function{}):
+			result = result + "func "
+		case reflect.TypeOf(lexer.Return{}):
+			result = result + "return "
 
 		// Variables and Values
 		case reflect.TypeOf(lexer.Value{}):
@@ -83,7 +93,7 @@ func (t *Translator) Translate(code string) string {
 			}
 
 		case reflect.TypeOf(lexer.Variable{}):
-			result = result + b.GetValue()
+			result = result + b.GetValue() + " "
 
 		// Brackets
 		case reflect.TypeOf(lexer.OpenFigureBracket{}):

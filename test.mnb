@@ -1,15 +1,8 @@
-a @= 10
-
-slon(a*a)
-
-b @= 'fuck '
-
-slon(b + '(and love too)')
-
-if a == 10 {
-    slon('a is 10')
+fn main() {
+    name @= 'Sanya'
+    slon(hello(name))
 }
 
-if a != 10 {
-    slon('a is not 10')
+fn hello(name string) string {
+    return 'Hello ' + name + '!'
 }

@@ -17,9 +17,12 @@ func (l *Lexer) Lex(code string) []Token {
 
 	for cursor < len(code) {
 		// Code separator is next-line sign
-		if string(code[cursor]) == "\n" ||
-			string(code[cursor]) == ";" {
+		if string(code[cursor]) == "\n" {
 			tokens = append(tokens, Separator{Value: "\n"})
+		} else if string(code[cursor]) == "." {
+			tokens = append(tokens, Dot{Value: "."})
+		} else if string(code[cursor]) == "," {
+			tokens = append(tokens, Comma{Value: ","})
 
 			// Math operations
 		} else if string(code[cursor]) == "+" {
@@ -75,6 +78,10 @@ func (l *Lexer) Lex(code string) []Token {
 				tokens = append(tokens, Else{"else"})
 			case "slon":
 				tokens = append(tokens, Put{Value: "slon"})
+			case "fn":
+				tokens = append(tokens, Function{Value: "fn"})
+			case "return":
+				tokens = append(tokens, Return{Value: "fn"})
 			default:
 				tokens = append(tokens, Variable{Value: word})
 			}
