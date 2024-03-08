@@ -17,6 +17,11 @@ type If struct{ Value string }
 
 func (i If) GetValue() string { return i.Value }
 
+// "Else" expression token
+type Else struct{ Value string }
+
+func (e Else) GetValue() string { return e.Value }
+
 // "If equal" expression token
 type IsEqual struct{ Value string }
 

@@ -71,6 +71,8 @@ func (l *Lexer) Lex(code string) []Token {
 			switch word {
 			case "if":
 				tokens = append(tokens, If{"if"})
+			case "else":
+				tokens = append(tokens, Else{"else"})
 			case "slon":
 				tokens = append(tokens, Put{Value: "slon"})
 			default:

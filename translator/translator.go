@@ -64,6 +64,9 @@ func (t *Translator) Translate(code string) string {
 		// If
 		case reflect.TypeOf(lexer.If{}):
 			result = result + "if "
+		// Else
+		case reflect.TypeOf(lexer.Else{}):
+			result = result + "else"
 
 		// Variables and Values
 		case reflect.TypeOf(lexer.Value{}):
