@@ -1,8 +1,16 @@
-fn main() {
-    name @= 'Sanya'
-    slon(hello(name))
+import 'net/http'
+import 'fmt'
+
+my TestStructure structure {
+    Port str
 }
 
-fn hello(name string) string {
-    return 'Hello ' + name + '!'
+fn main() {
+    st := TestStructure{Port: ':8080'}
+    http.HandleFunc('/', st.mainPage)
+    http.ListenAndServe(st.Port, nil)
+}
+
+fn (st TestStructure) mainPage(w http.ResponseWriter, r * http.Request) {
+    fmt.Fprintf(w, 'fuckniggers')
 }

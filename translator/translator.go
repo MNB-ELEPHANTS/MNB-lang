@@ -39,6 +39,8 @@ func (t *Translator) Translate(code string) string {
 			result = result + "."
 		case reflect.TypeOf(lexer.Comma{}):
 			result = result + ","
+		case reflect.TypeOf(lexer.DoubleDot{}):
+			result = result + ":"
 
 		// Math operations
 		case reflect.TypeOf(lexer.Minus{}):
@@ -78,6 +80,18 @@ func (t *Translator) Translate(code string) string {
 		case reflect.TypeOf(lexer.Return{}):
 			result = result + "return "
 
+		// Import
+		case reflect.TypeOf(lexer.Import{}):
+			result = result + "import "
+
+		// Type
+		case reflect.TypeOf(lexer.Type{}):
+			result = result + "type "
+
+		// Struct
+		case reflect.TypeOf(lexer.Struct{}):
+			result = result + "struct"
+
 		// Variables and Values
 		case reflect.TypeOf(lexer.Value{}):
 			v := b.GetValue()
@@ -108,6 +122,16 @@ func (t *Translator) Translate(code string) string {
 		// Base functions
 		case reflect.TypeOf(lexer.Put{}):
 			result = result + "println"
+
+		// Types
+		case reflect.TypeOf(lexer.String{}):
+			result = result + "string"
+		case reflect.TypeOf(lexer.Int{}):
+			result = result + "int"
+		case reflect.TypeOf(lexer.Uint{}):
+			result = result + "uint"
+		case reflect.TypeOf(lexer.Bool{}):
+			result = result + "bool"
 
 		default:
 			continue

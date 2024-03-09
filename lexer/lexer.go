@@ -23,6 +23,8 @@ func (l *Lexer) Lex(code string) []Token {
 			tokens = append(tokens, Dot{Value: "."})
 		} else if string(code[cursor]) == "," {
 			tokens = append(tokens, Comma{Value: ","})
+		} else if string(code[cursor]) == ":" {
+			tokens = append(tokens, DoubleDot{Value: ":"})
 
 			// Math operations
 		} else if string(code[cursor]) == "+" {
@@ -82,6 +84,23 @@ func (l *Lexer) Lex(code string) []Token {
 				tokens = append(tokens, Function{Value: "fn"})
 			case "return":
 				tokens = append(tokens, Return{Value: "fn"})
+			case "use":
+				tokens = append(tokens, Import{Value: "use"})
+			case "my":
+				tokens = append(tokens, Type{Value: "my"})
+			case "structure":
+				tokens = append(tokens, Struct{Value: "structure"})
+
+			// Types
+			case "str":
+				tokens = append(tokens, String{Value: "string"})
+			case "int":
+				tokens = append(tokens, Int{Value: "int"})
+			case "uint":
+				tokens = append(tokens, Uint{Value: "uint"})
+			case "bool":
+				tokens = append(tokens, Bool{Value: "bool"})
+
 			default:
 				tokens = append(tokens, Variable{Value: word})
 			}

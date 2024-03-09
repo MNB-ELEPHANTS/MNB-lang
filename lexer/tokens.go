@@ -117,7 +117,43 @@ type Comma struct{ Value string }
 
 func (c Comma) GetValue() string { return c.Value }
 
+// Double dot token
+
+type DoubleDot struct{ Value string }
+
+func (dd DoubleDot) GetValue() string { return dd.Value }
+
 // Return token
 type Return struct{ Value string }
 
 func (r Return) GetValue() string { return r.Value }
+
+// Import token
+type Import struct{ Value string }
+
+func (i Import) GetValue() string { return i.Value }
+
+// Types
+type String struct{ Value string }
+
+func (s String) GetValue() string { return s.Value }
+
+type Int struct{ Value string }
+
+func (i Int) GetValue() string { return i.Value }
+
+type Bool struct{ Value string }
+
+func (b Bool) GetValue() string { return b.Value }
+
+type Uint struct{ Value string }
+
+func (u Uint) GetValue() string { return u.Value }
+
+type Type struct{ Value string }
+
+func (t Type) GetValue() string { return t.Value }
+
+type Struct struct{ Value string }
+
+func (s Struct) GetValue() string { return s.Value }
