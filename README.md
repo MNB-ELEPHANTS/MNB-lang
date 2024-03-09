@@ -39,10 +39,13 @@
 # Getting started
 ## Hello elephant!
 ```
-slon('Hello elephant!')
+fn main() {
+    slon('Hello elephant!')
+}
 ```
 
 ## Variable assignment
+ Support type `int` `uint` `str` `bool`
 ```
 a @= 10
 b @= "fuck it"
@@ -61,3 +64,23 @@ if b != "fuck" {
     ...
 }
 ```
+
+## Setting types
+```
+my TestType int
+
+fn (t TestType) fuck() {
+    return t*t
+}
+```
+
+## Structures
+```
+my TestStruct structure {
+    Value1 str
+    Value2 int
+}
+
+ts @= TestStruct{Value1: "fuck", Value2: 123}
+```
+
